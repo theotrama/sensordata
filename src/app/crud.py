@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from config import Config
-from models import Base, Sensor
+from api.models import Base, Sensor
 
 engine = create_engine(Config.SQLALCHEMY_DATABASE_URI)
 Session = sessionmaker(bind=engine)
@@ -25,5 +25,5 @@ def add_sensor():
 
 
 if __name__ == "__main__":
-    recreate_database()
+    # recreate_database()
     add_sensor()
