@@ -15,7 +15,6 @@ class Sensor(Base):
     type = Column(String)
     unit = Column(String)
     date_added = Column(DateTime, default=datetime.datetime.utcnow)
-    test = Column(String)
 
     def __repr__(self):
         return f"<Sensor(name='{self.name}', type='{self.type}', date_added={self.date_added})>"
@@ -27,7 +26,7 @@ class Measurement(Base):
 
     id = Column(Integer, primary_key=True)
     sensor_id = Column(Integer, ForeignKey('sensors.id', ondelete='CASCADE'))
-    data = Column(Float)
+    datapoint = Column(Float)
     timestamp = Column(DateTime, default=datetime.datetime.utcnow)
 
     def __repr__(self):
