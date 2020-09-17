@@ -13,11 +13,18 @@ class Sensor(BaseModel):
         orm_mode = True
 
 
-class Measurement(BaseModel):
-    id: int
+class MeasurementBase(BaseModel):
     sensor_id: int
     datapoint: float
-    timestamp: datetime.datetime
 
     class Config:
         orm_mode = True
+
+
+class Measurement(MeasurementBase):
+    id: int
+    timestamp: datetime.datetime
+
+
+class MeasurementCreate(MeasurementBase):
+    pass

@@ -1,19 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app.database import SessionLocal
-from .import crud, models, schemas
+from .import crud, schemas
+from app.database_connection import get_db
 
 router = APIRouter()
-
-
-# Dependency
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 @router.get("/{sensor_id}", response_model=schemas.Sensor)

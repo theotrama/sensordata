@@ -1,7 +1,7 @@
 from fastapi import Depends, FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import sensor
+from app.api import sensor, measurement
 from .database import SessionLocal
 
 app = FastAPI()
@@ -20,11 +20,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(sensor.router)
 
 app.include_router(
     sensor.router,
     prefix="/sensors",
     tags=["sensors"],
-    dependencies=[Depends(get_token_header)],
+)
+
+app.include_router(
+    measurement.router,
+    prefix="/measurements",
+    tags=["measurements"],
 )
