@@ -2,15 +2,22 @@ import datetime
 from pydantic import BaseModel
 
 
-class Sensor(BaseModel):
-    id: int
+class SensorBase(BaseModel):
     name: str
     type: str
     unit: str
-    date_added: datetime.datetime
 
     class Config:
         orm_mode = True
+
+
+class Sensor(SensorBase):
+    id: int
+    date_added: datetime.datetime
+
+
+class SensorCreate(SensorBase):
+    pass
 
 
 class MeasurementBase(BaseModel):

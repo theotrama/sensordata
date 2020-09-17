@@ -30,4 +30,4 @@ class Measurement(Base):
     timestamp = Column(DateTime, default=datetime.datetime.utcnow)
 
     def __repr__(self):
-        return f"<Measurement(data='{self.data}', timestamp='{self.timestamp}', sensor_id={self.sensor_id})>"
+        return f"<Measurement(data='{self.datapoint}', timestamp='{self.timestamp}', sensor_id={self.sensor_id})>"

@@ -1,3 +1,5 @@
+from typing import List
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
@@ -7,10 +9,10 @@ from app.database_connection import get_db
 router = APIRouter()
 
 
-@router.get("/", response_model=schemas.Measurement)
+@router.get("/", response_model=List[schemas.Measurement])
 async def read_measurements(start_id: int = 0, end_id: int = 10, db: Session = Depends(get_db)):
-    measurements = crud.get_measurements(db, start_id=start_id, end_id=end_id)
-    if measurements is None:
+    measurements = crud.get_measurements_by_id(db, start_id=start_id, end_id=end_id)
+    if not measurements:
         raise HTTPException(status_code=404, detail="Measurements not found")
     return measurements
 
