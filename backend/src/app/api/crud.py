@@ -43,6 +43,16 @@ def get_measurements_by_id(db: Session, start_id: int, end_id: int):
     return db.query(models.Measurement).filter(models.Measurement.id.between(start_id, end_id)).all()
 
 
+def get_all_measurements_by_sensor(db: Session, sensor_id):
+    """
+    GET all measurements of a specific sensor
+    :param db:
+    :param sensor_id:
+    :return:
+    """
+    return db.query(models.Measurement).filter(models.Measurement.sensor_id == sensor_id).all()
+
+
 def create_measurement(db: Session, measurement: schemas.MeasurementCreate):
     """
     POST a measurement to the database

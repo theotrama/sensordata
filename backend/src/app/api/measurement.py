@@ -11,7 +11,18 @@ router = APIRouter()
 
 @router.get("/", response_model=List[schemas.Measurement])
 async def read_measurements(start_id: int = 0, end_id: int = 10, db: Session = Depends(get_db)):
+    """
+    GET measurements in an interval between start_id and end_id
+    """
     measurements = crud.get_measurements_by_id(db, start_id=start_id, end_id=end_id)
+    if not measurements:
+        raise HTTPException(status_code=404, detail="Measurements not found")
+    return measurements
+
+
+@router.get("/{sensor_id}", response_model=List[schemas.Measurement])
+async def read_all_measurements_by_sensor(sensor_id: int, db: Session = Depends(get_db)):
+    measurements = crud.get_all_measurements_by_sensor(db, sensor_id=sensor_id)
     if not measurements:
         raise HTTPException(status_code=404, detail="Measurements not found")
     return measurements
