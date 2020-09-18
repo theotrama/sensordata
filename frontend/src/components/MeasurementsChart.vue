@@ -12,19 +12,21 @@
         default: null,
       },
       options: {
-        type: Array,
+        type: Object,
       }
     },
 
     mounted () {
-      const dates = this.chartData.map(d => d.total).reverse();
-      const measurements = this.chartData.map(d => d.date).reverse();
+      console.log(this.chartData)
+      const dates = this.chartData.map(d => d.date);
+      const totals = this.chartData.map(d => d.total);
+      console.log(this.chartData)
 
       this.renderChart({
           labels: dates,
           datasets: [{
             label: this.label,
-            data: this.measurements,
+            data: totals,
           }],
       }, this.options);
     }
