@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <measurements-chart  :chartdata="arrMeasurementData" :options="chartOptions" label="Degree Celsius"></measurements-chart>
+    <measurements-chart v-if="loaded" :chartdata="arrMeasurementData" :options="chartOptions" label="Degree Celsius"></measurements-chart>
   </div>
 </template>
 
@@ -17,6 +17,7 @@ export default {
         return {
             arrMeasurementData: [],
             arrMeasurementTimestamp: [],
+            loaded: false,
 
             chartOptions: {
                 responsive: true,
@@ -34,6 +35,10 @@ export default {
         }
     },
 
+    mounted() {
+        this.requestData();
+    },
+
     methods : {
         async requestData() {
             try {
@@ -41,14 +46,18 @@ export default {
                 const response = await fetch('http://localhost:8000/measurements/5');
                 const data = await response.json();
 
+                console.log(data)
+
                 data.forEach(d => {
                     const date = d.timestamp
                     const {
                         datapoint,
                     } = d;
+                    console.log(datapoint)
                     this.arrMeasurementData.push({date, total: datapoint});
 
                 });
+                console.log(this.arrMeasurementData)
                 this.loaded = true
 
             } catch (error) {

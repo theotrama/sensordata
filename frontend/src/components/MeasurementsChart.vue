@@ -17,8 +17,8 @@
     },
 
     mounted () {
-      const dates = this.chartData.map(d => d.timestamp).reverse();
-      const measurements = this.chartData.map(d => d.datapoint).reverse();
+      const dates = this.chartData.map(d => d.total).reverse();
+      const measurements = this.chartData.map(d => d.date).reverse();
 
       this.renderChart({
           labels: dates,
