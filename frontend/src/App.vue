@@ -8,6 +8,7 @@
       <div class="row">
         <div class="col-12">
           <router-view />
+          
         </div>
       </div>
     </div>
@@ -16,9 +17,7 @@
 </template>
 
 <script>
-    import Chart from 'chart.js';
     import SensorDataTable from '@/components/SensorDataTable.vue'
-    import measurementChartData from './chart-data.js';
 
     export default {
         name: 'app',
@@ -29,12 +28,10 @@
             return {
                 measurements: [],
                 sensors: [],
-                measurementChartData: measurementChartData,
             }
         },
         mounted() {
-            this.getMeasurements(),
-            this.createChart('measurements-chart', this.measurementChartData);
+            this.getMeasurements()
         },
 
         methods: {
@@ -55,14 +52,6 @@
                 } catch (error) {
                     console.error(error)
                 }
-            },
-            createChart(chartId, chartData) {
-                const ctx = document.getElementById(chartId);
-                const measurementChart = new Chart(ctx, {
-                type: chartData.type,
-                data: chartData.data,
-                options: chartData.options,
-                });
             },
         }
     }

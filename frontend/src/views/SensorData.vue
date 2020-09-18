@@ -1,15 +1,60 @@
 <template>
-  <div>
-    <measurements-chart></measurements-chart>
+  <div class="container">
+    <measurements-chart  :chartdata="arrMeasurementData" :options="chartOptions" label="Degree Celsius"></measurements-chart>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 import MeasurementsChart from '@/components/MeasurementsChart'
 
 export default {
-  components: {
-    MeasurementsChart
-  }
+    name: 'MeasurementsChartContainer',
+    components: {
+        MeasurementsChart
+    },
+    data() {
+        return {
+            arrMeasurementData: [],
+            arrMeasurementTimestamp: [],
+
+            chartOptions: {
+                responsive: true,
+                maintainAspectRatio: false,
+                lineTension: 1,
+                scales: {
+                    yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        padding: 25,
+                    }
+                    }]
+                }
+            }
+        }
+    },
+
+    methods : {
+        async requestData() {
+            try {
+                // GET data from API
+                const response = await fetch('http://localhost:8000/measurements/5');
+                const data = await response.json();
+
+                data.forEach(d => {
+                    const date = d.timestamp
+                    const {
+                        datapoint,
+                    } = d;
+                    this.arrMeasurementData.push({date, total: datapoint});
+
+                });
+                this.loaded = true
+
+            } catch (error) {
+                console.error(error)
+            }
+        }
+    }
 }
 </script>
