@@ -17,10 +17,8 @@
     },
 
     mounted () {
-      console.log(this.chartData)
       const dates = this.chartData.map(d => d.date);
       const totals = this.chartData.map(d => d.total);
-      console.log(this.chartData)
 
       this.renderChart({
           labels: dates,

@@ -23,12 +23,12 @@ app.add_middleware(
 
 app.include_router(
     sensor.router,
-    prefix="/sensors",
+    prefix="/api/sensors",
     tags=["sensors"],
 )
 
 app.include_router(
     measurement.router,
-    prefix="/measurements",
+    prefix="/api/measurements",
     tags=["measurements"],
 )

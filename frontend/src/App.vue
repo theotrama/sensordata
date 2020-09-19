@@ -2,58 +2,23 @@
   <div id="app" class="container">
     <h1 class="m-5 text-center">Sensor Data UI</h1>
     
-    <router-link to="/">Sensor Data</router-link> |
+    <router-link to="/">Temperature Data</router-link> |
+    <router-link to="/humidity">Humidity Data</router-link>
     
     <div class="container">
       <div class="row">
         <div class="col-12">
           <router-view />
-          
         </div>
       </div>
     </div>
-    <sensor-data-table :measurements="measurements" />
   </div>
 </template>
 
 <script>
-    import SensorDataTable from '@/components/SensorDataTable.vue'
 
     export default {
         name: 'app',
-        components: {
-            SensorDataTable,
-        },
-        data() {
-            return {
-                measurements: [],
-                sensors: [],
-            }
-        },
-        mounted() {
-            this.getMeasurements()
-        },
-
-        methods: {
-            async getMeasurements() {
-                try {
-                    const response = await fetch('http://localhost:8000/measurements/5')
-                    const data = await response.json()
-                    this.measurements = data
-                } catch (error) {
-                    console.error(error)
-                }
-            },
-            async getSensors() {
-                try {
-                    const response = await fetch('http://localhost:8000/sensors/5')
-                    const data = await response.json()
-                    this.sensors = data
-                } catch (error) {
-                    console.error(error)
-                }
-            },
-        }
     }
 </script>
 

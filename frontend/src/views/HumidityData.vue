@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <measurements-chart v-if="loaded" :chartData="arrMeasurementData" :options="chartOptions" label="Temperature in Degree Celsius"></measurements-chart>
+    <measurements-chart v-if="loaded" :chartData="arrMeasurementData" :options="chartOptions" label="Relative Humidity"></measurements-chart>
   </div>
 </template>
 
@@ -9,7 +9,7 @@ import moment from "moment";
 import MeasurementsChart from '@/components/MeasurementsChart'
 
 export default {
-    name: 'MeasurementsChartContainer',
+    name: 'HumidityChartContainer',
     components: {
         MeasurementsChart
     },
@@ -48,7 +48,7 @@ export default {
         async requestData() {
             try {
                 // GET data from API
-                const response = await fetch(process.env.API_BASE_URL + '/api/measurements/5');
+                const response = await fetch(process.env.API_BASE_URL + '/api/measurements/10');
                 const data = await response.json();
 
                 data.forEach(d => {
