@@ -13,7 +13,7 @@ router = APIRouter()
 def read_sensor(sensor_id: int, db: Session = Depends(get_db)):
     sensor = crud.get_sensor(db, sensor_id=sensor_id)
     if sensor is None:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=404, detail="Sensor not found")
     return sensor
 
 
@@ -24,7 +24,7 @@ def read_sensors(start_id: int = 0, end_id: int = 10, db: Session = Depends(get_
     """
     sensors = crud.get_sensors_by_id(db, start_id=start_id, end_id=end_id)
     if not sensors:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=404, detail="Sensor not found")
     return sensors
 
 

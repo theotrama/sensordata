@@ -26,5 +26,3 @@ RUN pip3 install -r $APP_HOME/requirements.txt
 USER app
 
 ENV FASTAPI_ENV=dev_docker
-
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "5057"]
