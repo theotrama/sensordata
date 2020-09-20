@@ -3,7 +3,7 @@ version: '3'
 services:
   db:
     build:
-      context: ./postgres
+      context: ./services/postgres
       dockerfile: Dockerfile
     expose:
       - 5432
@@ -13,15 +13,28 @@ services:
       - POSTGRES_DB=sensor_db
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+
   web:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    ports:
-      - '5057:5057'
+    command: gunicorn app.main:app --bind 0.0.0.0:5000 -w 4 -k uvicorn.workers.UvicornWorker
+    expose:
+      - 5000
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.backend.rule=Host(`localhost`)
     depends_on:
       - db
 
+  traefik:
+    image: traefik:v2.2
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./services/traefik/traefik.dev.toml:/etc/traefik/traefik.toml
+
 volumes:
   pg_data: {}
-
