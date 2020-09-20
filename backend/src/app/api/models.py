@@ -15,7 +15,7 @@ class Sensor(Base):
     type = Column(String)
     unit = Column(String)
     date_added = Column(DateTime, default=datetime.datetime.utcnow)
-    date_add2ed = Column(DateTime, default=datetime.datetime.utcnow)
+    date_added2 = Column(DateTime, default=datetime.datetime.utcnow)
 
     def __repr__(self):
         return f"<Sensor(name='{self.name}', type='{self.type}', date_added={self.date_added})>"
