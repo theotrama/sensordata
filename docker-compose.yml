@@ -23,7 +23,7 @@ services:
       - 5000
     labels:
       - traefik.enable=true
-      - traefik.http.routers.backend.rule=PathPrefix(`/api`)
+      - traefik.http.routers.backend.rule=PathPrefix(`/api`)|| PathPrefix(`/docs`) || PathPrefix(`/redoc`) || PathPrefix(`/openapi.json`)
     depends_on:
       - db
 

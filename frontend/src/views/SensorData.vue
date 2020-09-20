@@ -48,8 +48,9 @@ export default {
         async requestData() {
             try {
                 // GET data from API
-                const response = await fetch(process.env.API_BASE_URL + '/api/measurements/5');
+                const response = await fetch(process.env.API_BASE_URL + '/api/measurements/1');
                 const data = await response.json();
+                console.log(process.env.VUE_APP_MY_ENV_VARIABLE)
 
                 data.forEach(d => {
                     //const date = d.timestamp
