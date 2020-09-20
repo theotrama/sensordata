@@ -2,11 +2,11 @@
   "name": "frontend",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "theotrama <jankoch15@yahoo.de>",
+  "author": "theotrama",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
+    "start": "npm run dev --mode development --open --hot --host 0.0.0.0",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js"
   },

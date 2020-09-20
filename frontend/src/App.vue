@@ -1,10 +1,10 @@
 <template>
   <div id="app" class="container">
     <h1 class="m-5 text-center">Sensor Data UI</h1>
-    
+
     <router-link to="/">Temperature Data</router-link> |
     <router-link to="/humidity">Humidity Data</router-link>
-    
+
     <div class="container">
       <div class="row">
         <div class="col-12">
@@ -20,6 +20,7 @@
     export default {
         name: 'app',
     }
+    console.log(process.env.VUE_APP_NOT_SECRET_CODE)
 </script>
 
 <style>
