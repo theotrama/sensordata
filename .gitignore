@@ -158,6 +158,7 @@ fabric.properties
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+dev.env.js
 
 # Editor settings
 .vscode
