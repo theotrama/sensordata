@@ -48,7 +48,7 @@ export default {
         async requestData() {
             try {
                 // GET data from API
-                const response = await fetch(process.env.API_BASE_URL + '/api/measurements/1');
+                const response = await fetch(process.env.VUE_APP_API_BASE_URL + '/measurements/2');
                 const data = await response.json();
 
                 data.forEach(d => {
