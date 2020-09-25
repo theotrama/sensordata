@@ -9,7 +9,7 @@ path = Path(os.path.abspath(__file__))
 
 
 class Config:
-    if os.getenv("FASTAPI_ENV") == "dev_docker":
+    if os.getenv("FASTAPI_ENV") == "docker":
         dotenv_path = os.path.join(path.parent.parent.parent, '.env.dev.db')
     else:
         dotenv_path = os.path.join(path.parent.parent.parent, '.env.local.db')
