@@ -10,19 +10,20 @@ RUN groupadd app
 RUN useradd app -g app -m
 
 # create the appropriate directories
-ENV HOME=/opt/app
+ENV WORKDIR=/opt/app/web/src
+ENV USER=app
 ENV APP_HOME=/opt/app/web
 RUN mkdir -p $APP_HOME
-WORKDIR $APP_HOME
+WORKDIR $WORKDIR
 
 # copy project
-COPY ./src $APP_H
+COPY . $APP_HOME
 # chown all web app files to the app user
-RUN chown -R app:app $APP_HOME
+RUN chown -R $USER:$USER $APP_HOME
 
-RUN pip3 install -r $APP_HOME/requirements.txt
+RUN pip3 install -r $WORKDIR/requirements.txt
 
 # change to the app user
-USER app
+USER $USER
 
 ENV FASTAPI_ENV=dev_docker

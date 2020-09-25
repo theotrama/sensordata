@@ -6,12 +6,18 @@ from dotenv import load_dotenv
 
 # Create dotenv path and load environment variables
 path = Path(os.path.abspath(__file__))
-dotenv_path = os.path.join(path.parent.parent, '.env')
-load_dotenv(dotenv_path)
 
 
 class Config:
     if os.getenv("FASTAPI_ENV") == "dev_docker":
-        SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL_DEV_DOCKER")
+        dotenv_path = os.path.join(path.parent.parent.parent, '.env.dev.db')
     else:
-        SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL_DEV_LOCAL")
+        dotenv_path = os.path.join(path.parent.parent.parent, '.env.local.db')
+
+    load_dotenv(dotenv_path)
+    POSTGRES_DB = os.environ.get("POSTGRES_DB")
+    POSTGRES_USER = os.environ.get("POSTGRES_USER")
+    POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
+    DB_URL = os.environ.get("DB_URL")
+    DB_PORT = os.environ.get("DB_PORT")
+    SQLALCHEMY_DATABASE_URI = f"postgres+psycopg2://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{DB_URL}/{POSTGRES_DB}"
