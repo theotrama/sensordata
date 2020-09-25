@@ -83,7 +83,6 @@ celerybeat-schedule
 # dotenv
 .env
 .env.local.db
-.env.dev.db
 .env.db
 .env.prod
 .env.prod.db
