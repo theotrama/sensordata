@@ -15,7 +15,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    command: uvicorn app.main:app --host 0.0.0.0 --port 5000
+    command: gunicorn app.main:app --bind 0.0.0.0:5000 -w 4 -k uvicorn.workers.UvicornWorker
     expose:
       - 5000
     labels:
@@ -31,7 +31,7 @@ services:
       - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./services/traefik/traefik.dev.toml:/etc/traefik/traefik.toml
+      - ./services/traefik/traefik.prod.toml:/etc/traefik/traefik.toml
 
   frontend:
     build:
