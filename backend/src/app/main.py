@@ -14,7 +14,7 @@ async def get_token_header(x_token: str = Header(...)):
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*", "http://localhost:*"],
+    allow_origins=["http://159.89.239.100", "http://localhost:*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
