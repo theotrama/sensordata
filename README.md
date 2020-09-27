@@ -13,11 +13,27 @@ The backend is written in Python using the framework [FastAPI](https://github.co
 
 ## Environments
 There are three environments you can choose from:
-1) Production environment in docker containers
-2) Development environment in docker containers
-3) Development environment without docker containers
+* Production environment in docker containers
+* Development environment in docker containers
+* Development environment without docker containers
 
-### Production 
+
+### Production environment in docker containers
+The production environment uses gunicorn as the application server and traefik as the reverse proxy. Deploy the production environment to your server and go to the projects root directory. Before spinning up the docker containers, you have to edit the `.env.prod.db-sample` file. Copy the file and edit the environment variables in `.env.prod.db`
+```
+cp .env.prod.db-sample .env.prod.db
+vim .env.prod.db
+```
+
+Then you can start the containers and run the initial database migrations. 
+```
+docker-compose up -f docker-compose.prod.yml up --build
+docker-compose -f docker-compose.prod.yml exec web alembic upgrade head
+```
+
+The web app should now be available on your server. Go to [http://<SERVER_IP>/docs](http://<SERVER_IP>/docs) for the API documentation.
+
+Access the logs with `docker-compose -f docker-compose.prod.yml logs`
 
 ## Tech stack
 
