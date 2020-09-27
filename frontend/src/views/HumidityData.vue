@@ -52,7 +52,6 @@ export default {
                 const data = await response.json();
 
                 data.forEach(d => {
-                    //const date = d.timestamp
                     const date = moment(d.timestamp, "YYYYMMDD").format("DD/MM/YYYY");
                     const {
                         datapoint,
