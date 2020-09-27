@@ -50,6 +50,7 @@ export default {
                 // GET data from API
                 const response = await fetch(process.env.VUE_APP_API_BASE_URL + '/measurements/2');
                 const data = await response.json();
+                
 
                 data.forEach(d => {
                     const date = moment(d.timestamp, "YYYYMMDD").format("DD/MM/YYYY");
