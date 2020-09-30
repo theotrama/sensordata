@@ -5,8 +5,8 @@ services:
     build:
       context: ./services/postgres
       dockerfile: Dockerfile
-    expose:
-      - 5432
+    ports:
+      - "5432:5432"
     volumes:
       - pg_data:/var/lib/postgresql/data
     env_file:
