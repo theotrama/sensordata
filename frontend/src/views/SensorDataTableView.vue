@@ -1,7 +1,7 @@
 <template>
   <div class="home">
 
-    <div class="container mt-5">
+    <div class="container">
         <sensor-data-list :sensors="arrSensors"></sensor-data-list>
     </div>
 

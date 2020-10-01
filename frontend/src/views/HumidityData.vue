@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <measurements-chart v-if="loaded" :chartData="arrMeasurementData" :options="chartOptions" label="Relative Humidity"></measurements-chart>
   </div>
 </template>
@@ -51,7 +51,6 @@ export default {
                 const response = await fetch(process.env.VUE_APP_API_BASE_URL + '/measurements/2/range?skip=3600');
                 const data = await response.json();
                 
-
                 data.forEach(d => {
                     const date = moment(d.timestamp, "YYYYMMDD").format("DD/MM/YYYY");
                     const {

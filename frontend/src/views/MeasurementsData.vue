@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <measurements-chart v-if="loaded" :chartData="arrMeasurementData" :options="chartOptions" label="Temperature in Degree Celsius"></measurements-chart>
+  <div class="container-fluid">
+    <measurements-chart v-if="loaded" :chartData="arrMeasurementData" :options="chartOptions" :label="objSensorData"></measurements-chart>
   </div>
 </template>
 
@@ -9,13 +9,14 @@ import moment from "moment";
 import MeasurementsChart from '@/components/MeasurementsChart'
 
 export default {
-    name: 'MeasurementsChartContainer',
+    name: 'MeasurementsDataContainer',
     components: {
         MeasurementsChart
     },
     data() {
         return {
             arrMeasurementData: [],
+            objSensorData: {},
             arrMeasurementTimestamp: [],
             loaded: false,
 
@@ -41,14 +42,15 @@ export default {
     },
 
     mounted() {
-        this.requestData();
+        this.requestMeasurementData();
+        this.requestSensorData();
     },
 
     methods : {
-        async requestData() {
+        async requestMeasurementData() {
             try {
                 // GET data from API
-                const response = await fetch(process.env.VUE_APP_API_BASE_URL + '/measurements/1/range?skip=60');
+                const response = await fetch(process.env.VUE_APP_API_BASE_URL + '/measurements/' + this.$route.params.id + '/range?skip=60');
                 const data = await response.json();
 
                 data.forEach(d => {
@@ -59,7 +61,18 @@ export default {
                     } = d;
                     this.arrMeasurementData.push({date, total: datapoint});
                 });
-                this.loaded = true
+
+            } catch (error) {
+                console.error(error)
+            }
+        },
+        async requestSensorData() {
+            try {
+                // GET data from API
+                const response = await fetch(process.env.VUE_APP_API_BASE_URL + '/sensors/' + this.$route.params.id);
+                const data = await response.json();
+                this.objSensorData = data;
+                this.loaded = true;
 
             } catch (error) {
                 console.error(error)

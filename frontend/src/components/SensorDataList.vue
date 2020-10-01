@@ -12,7 +12,7 @@
             Sensor type: {{ sensor.type }} <br>
             Sensor id: {{ sensor.id }}
           </p>
-          <a href="/" class="btn btn-primary">View {{ sensor.type }} data</a>
+          <a v-bind:href="'/sensor/'+ sensor.id" class="btn btn-primary">View {{ sensor.type }} data</a>
         </div>
       </div>
     </div>
