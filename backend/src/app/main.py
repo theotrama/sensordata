@@ -2,6 +2,7 @@ from fastapi import Depends, FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api import sensor, measurement
+from app.config import Config
 from .database import SessionLocal
 
 app = FastAPI()
@@ -14,7 +15,7 @@ async def get_token_header(x_token: str = Header(...)):
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://159.89.239.100", "http://localhost:*"],
+    allow_origins=Config.CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

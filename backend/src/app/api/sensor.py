@@ -18,11 +18,11 @@ def read_sensor(sensor_id: int, db: Session = Depends(get_db)):
 
 
 @router.get("/", response_model=List[schemas.Sensor])
-def read_sensors(start_id: int = 0, end_id: int = 10, db: Session = Depends(get_db)):
+def read_all_sensors(db: Session = Depends(get_db)):
     """
     GET list of sensors
     """
-    sensors = crud.get_sensors_by_id(db, start_id=start_id, end_id=end_id)
+    sensors = crud.get_all_sensors(db)
     if not sensors:
         raise HTTPException(status_code=404, detail="Sensor not found")
     return sensors

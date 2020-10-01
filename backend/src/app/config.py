@@ -23,3 +23,4 @@ class Config:
     DB_URL = os.environ.get("DB_URL")
     DB_PORT = os.environ.get("DB_PORT")
     SQLALCHEMY_DATABASE_URI = f"postgres+psycopg2://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{DB_URL}/{POSTGRES_DB}"
+    CORS_ORIGINS = os.environ.get("CORS_ORIGINS")

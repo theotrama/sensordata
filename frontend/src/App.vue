@@ -2,7 +2,8 @@
   <div id="app" class="container">
     <h1 class="m-5 text-center">Sensor Data UI</h1>
 
-    <router-link to="/">Temperature Data</router-link> |
+    <router-link to="/">Sensor List</router-link> |
+    <router-link to="/temperature">Temperature Data</router-link> |
     <router-link to="/humidity">Humidity Data</router-link>
 
     <div class="container">

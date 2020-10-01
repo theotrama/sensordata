@@ -1,20 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import SensorData from '../views/SensorData.vue'
+import TemperatureData   from '../views/TemperatureData.vue'
 import HumidityData from '../views/HumidityData.vue'
+import SensorDataTableView from '../views/SensorDataTableView.vue'
 
 Vue.use(VueRouter)
 
   const routes = [
   {
-    path: '/',
+    path: '/temperature',
     name: 'Temperature',
-    component: SensorData
+    component: TemperatureData
   },
   {
     path: '/humidity',
     name: 'Humidity',
     component: HumidityData,
+  },
+  {
+    path: '/',
+    name: 'Sensors',
+    component: SensorDataTableView,
   },
 ]
 

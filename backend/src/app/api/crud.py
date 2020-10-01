@@ -21,15 +21,13 @@ def create_sensor(db: Session, sensor: schemas.SensorCreate):
     return db_sensor
 
 
-def get_sensors_by_id(db: Session, start_id: int, end_id: int):
+def get_all_sensors(db: Session):
     """
     GET all sensors from start_id to end_id
     :param db:
-    :param start_id:
-    :param end_id:
     :return: QueryList
     """
-    return db.query(models.Sensor).filter(models.Sensor.id.between(start_id, end_id)).all()
+    return db.query(models.Sensor).all()
 
 
 def get_measurements_by_id(db: Session, start_id: int, end_id: int):
