@@ -26,4 +26,4 @@ RUN pip3 install -r $WORKDIR/requirements.txt
 # change to the app user
 USER $USER
 
-ENV FASTAPI_ENV=docker
+ENV FASTAPI_ENV=docker_dev
