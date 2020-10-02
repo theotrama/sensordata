@@ -85,8 +85,8 @@ uvicorn app.main:app --reload
 #### Frontend
 Switch to the frontend directory and simply run the development server.
 ```
-cd fronted/
-npm run server
+cd frontend/
+npm run serve-local
 ```
 
 ## Todo

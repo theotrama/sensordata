@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  db:
+  db_dev:
     build:
       context: ./services/postgres
       dockerfile: Dockerfile
@@ -11,7 +11,7 @@ services:
       - pg_data_dev:/var/lib/postgresql/data
     env_file:
       - ./backend/.env.dev.db
-  web:
+  web_dev:
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -22,9 +22,9 @@ services:
       - traefik.enable=true
       - traefik.http.routers.backend.rule=PathPrefix(`/api`)|| PathPrefix(`/docs`) || PathPrefix(`/redoc`) || PathPrefix(`/openapi.json`)
     depends_on:
-      - db
+      - db_dev
 
-  traefik:
+  traefik_dev:
     image: traefik:v2.2
     ports:
       - "80:80"
@@ -33,7 +33,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./services/traefik/traefik.dev.toml:/etc/traefik/traefik.toml
 
-  frontend:
+  frontend_dev:
     build:
       context: ./frontend
       dockerfile: Dockerfile
