@@ -42,16 +42,20 @@ export default {
     },
 
     mounted() {
-        this.requestMeasurementData();
-        this.requestSensorData();
+        this.requestMeasurementAndSensorData();
     },
 
     methods : {
-        async requestMeasurementData() {
+        async requestMeasurementAndSensorData() {
             try {
-                // GET data from API
+                // GET measurement data from API
                 const response = await fetch(process.env.VUE_APP_API_BASE_URL + '/measurements/' + this.$route.params.id + '/range?skip=60');
                 const data = await response.json();
+
+                // GET sensor data from API
+                const response = await fetch(process.env.VUE_APP_API_BASE_URL + '/sensors/' + this.$route.params.id);
+                const data = await response.json();
+                this.objSensorData = data;
 
                 data.forEach(d => {
                     //const date = d.timestamp
@@ -73,7 +77,6 @@ export default {
                 const response = await fetch(process.env.VUE_APP_API_BASE_URL + '/sensors/' + this.$route.params.id);
                 const data = await response.json();
                 this.objSensorData = data;
-                //this.loaded = true;
 
             } catch (error) {
                 console.error(error)
