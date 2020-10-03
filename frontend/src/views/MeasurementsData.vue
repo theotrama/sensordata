@@ -51,7 +51,7 @@ export default {
         async requestMeasurementData() {
             try {
                 // GET measurement data from API
-                const response = await fetch(process.env.VUE_APP_API_BASE_URL + '/measurements/' + this.$route.params.id + '/range?skip=60');
+                const response = await fetch(process.env.VUE_APP_API_BASE_URL + '/measurements/' + this.$route.params.id + '/range?skip=10');
                 const data = await response.json();
 
                 data.forEach(d => {
