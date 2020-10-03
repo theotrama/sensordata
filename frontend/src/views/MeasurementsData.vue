@@ -56,7 +56,7 @@ export default {
 
                 data.forEach(d => {
                     //const date = d.timestamp
-                    const date = moment(d.timestamp, "YYYYMMDD-HH:MM:SS").format("DD/MM/YYYY-HH:MM:SS");
+                    const date = moment(d.timestamp, "YYYY-MM-DD-hh:mm:ss").format("DD/MM/YYYY HH:MM:SS");
                     const {
                         datapoint,
                     } = d;
