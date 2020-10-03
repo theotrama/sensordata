@@ -60,6 +60,7 @@ export default {
                         datapoint,
                     } = d;
                     this.arrMeasurementData.push({date, total: datapoint});
+                    this.loaded = true;
                 });
 
             } catch (error) {
@@ -72,7 +73,7 @@ export default {
                 const response = await fetch(process.env.VUE_APP_API_BASE_URL + '/sensors/' + this.$route.params.id);
                 const data = await response.json();
                 this.objSensorData = data;
-                this.loaded = true;
+                //this.loaded = true;
 
             } catch (error) {
                 console.error(error)
