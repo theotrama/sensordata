@@ -51,12 +51,14 @@ export default {
         async requestMeasurementData() {
             try {
                 // GET measurement data from API
-                const response = await fetch(process.env.VUE_APP_API_BASE_URL + '/measurements/' + this.$route.params.id + '/range?skip=10');
+                const response = await fetch(process.env.VUE_APP_API_BASE_URL + '/measurements/' + this.$route.params.id + '/range?skip=30');
                 const data = await response.json();
 
                 data.forEach(d => {
+                    console.log(d.timestamp)
                     //const date = d.timestamp
-                    const date = moment(d.timestamp, "YYYY-MM-DD-hh:mm:ss").format("DD/MM/YYYY HH:MM:SS");
+                    const date = moment(d.timestamp, "YYYY-MM-DDTHH:mm:ss").format("YYYY-MM-DD HH:mm:ss");
+                    console.log(date)
                     const {
                         datapoint,
                     } = d;
