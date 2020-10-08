@@ -41,6 +41,17 @@ async def read_range_of_measurements_by_sensor(sensor_id: int, skip: int = 1, db
     return measurements
 
 
+@router.get("/{sensor_id}/latest", response_model=schemas.Measurement)
+async def read_latest_measurement_by_sensor(sensor_id: int, db: Session = Depends(get_db)):
+    """
+    GET the latest measurement of a specific sensor
+    """
+    measurement = crud.get_latest_measurement_by_sensor(db, sensor_id=sensor_id)
+    if not measurement:
+        raise HTTPException(status_code=404, detail="Measurement not found")
+    return measurement
+
+
 @router.post("/", response_model=schemas.MeasurementCreate)
 async def create_measurement(measurement: schemas.MeasurementCreate, db: Session = Depends(get_db)):
     db_sensor = crud.get_sensor(db, sensor_id=measurement.sensor_id)

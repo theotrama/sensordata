@@ -1,5 +1,6 @@
 <template>
   <div class="container-fluid">
+    <last-measurement v-if="single_measurement_loaded" :last_measurement="objLastMeasurement" :sensor="objSensorData"></last-measurement>
     <measurements-chart v-if="measurements_loaded && sensors_loaded" :chartData="arrMeasurementData" :options="chartOptions" :label="objSensorData"></measurements-chart>
   </div>
 </template>
@@ -7,19 +8,23 @@
 <script>
 import moment from "moment";
 import MeasurementsChart from '@/components/MeasurementsChart'
+import LastMeasurement from '@/components/LastMeasurement'
 
 export default {
     name: 'MeasurementsDataContainer',
     components: {
-        MeasurementsChart
+        MeasurementsChart,
+        LastMeasurement
     },
     data() {
         return {
             arrMeasurementData: [],
             objSensorData: {},
             arrMeasurementTimestamp: [],
+            objLastMeasurement: {},
             measurements_loaded: false,
             sensors_loaded: false,
+            single_measurement_loaded: false,
 
             chartOptions: {
                 responsive: true,
@@ -45,6 +50,7 @@ export default {
     mounted() {
         this.requestMeasurementData();
         this.requestSensorData();
+        this.requestLastMeasurementData();
     },
 
     methods : {
@@ -81,7 +87,19 @@ export default {
             } catch (error) {
                 console.error(error)
             }
-        }
+        },
+        async requestLastMeasurementData() {
+            try {
+                // GET data from API
+                const response = await fetch(process.env.VUE_APP_API_BASE_URL + '/measurements/' + this.$route.params.id + '/latest');
+                const data = await response.json();
+                this.objLastMeasurement = data;
+                this.single_measurement_loaded = true;
+
+            } catch (error) {
+                console.error(error)
+            }
+        },
     }
 }
 </script>

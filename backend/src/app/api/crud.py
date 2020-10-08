@@ -60,11 +60,21 @@ def get_range_of_measurements_by_sensor(db: Session, sensor_id, skip: int):
     """
     measurements = db.query(models.Measurement).filter(models.Measurement.sensor_id == sensor_id).all()
     range_of_measurements = []
-    # if end_id <= len(measurements):
     for i in range(0, len(measurements), skip):
         range_of_measurements.append(measurements[i])
 
     return range_of_measurements
+
+
+def get_latest_measurement_by_sensor(db: Session, sensor_id):
+    """
+    GET the latest measurement of a specific sensor
+    :param db:
+    :param sensor_id:
+    :return:
+    """
+    measurement = db.query(models.Measurement).filter(models.Measurement.sensor_id == sensor_id).order_by(models.Measurement.id.desc()).first()
+    return measurement
 
 
 def create_measurement(db: Session, measurement: schemas.MeasurementCreate):

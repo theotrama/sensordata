@@ -1,12 +1,13 @@
 <template>
   <div id="sensor-data-list" class="table-responsive">
+      
       <div class="my-3" v-for="sensor in sensors" :key="sensor.id">
       <div class="card">
         <div class="card-header">
-          Sensor: {{ sensor.id}}
+          Sensor: {{ sensor.id }}
         </div>
         <div class="card-body">
-          <h5 class="card-title">{{ sensor.name}}</h5>
+          <h5 class="card-title">{{ sensor.name }}</h5>
           
           <p class="card-text">
             Sensor type: {{ sensor.type }} <br>
@@ -25,7 +26,8 @@
   export default {
     name: 'sensor-data-list',
     props: {
-        sensors: Array
+        sensors: Array,
+        measurements: Array,
     }
   }
 </script>
