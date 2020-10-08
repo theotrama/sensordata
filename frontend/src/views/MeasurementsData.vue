@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
-    <last-measurement v-if="single_measurement_loaded" :last_measurement="objLastMeasurement" :sensor="objSensorData"></last-measurement>
-    <measurements-chart v-if="measurements_loaded && sensors_loaded" :chartData="arrMeasurementData" :options="chartOptions" :label="objSensorData"></measurements-chart>
+    <last-measurement v-if="single_measurement_loaded && measurements_loaded && sensors_loaded" :last_measurement="objLastMeasurement" :sensor="objSensorData"></last-measurement>
+    <measurements-chart v-if="single_measurement_loaded && measurements_loaded && sensors_loaded" :chartData="arrMeasurementData" :options="chartOptions" :label="objSensorData"></measurements-chart>
   </div>
 </template>
 
